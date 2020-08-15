@@ -3,7 +3,7 @@ const lightBlue = document.getElementById('lightBlue');
 const violet = document.getElementById('violet');
 const orange = document.getElementById('orange');
 const green = document.getElementById('green');
-const lastLevel = 10;
+const lastLevel = 1;
 
 class Game {
   constructor() {
@@ -16,7 +16,7 @@ class Game {
 
   start () {
     this.chooseColor = this.chooseColor.bind(this);
-    btnStart.classList.add('hide');
+    btnStart.classList.toggle('hide');
     this.level = 1;
     this.colors = {
       lightBlue,
@@ -97,19 +97,31 @@ class Game {
       this.subLevel++;
       if (this.subLevel === this.level) {
         this.level++;
-        //this.removeClickEvents();
+        this.removeClickEvents();
         if(this.level === (lastLevel + 1)){
-          //Win
+          this.wonGame();
         } else {
           setTimeout(() => this.nextLevel(), 1700) ;
         }
 
       }
     } else {
-      //defeat
-
+      this.lostGame();
     }
 
+  }
+
+  wonGame() {
+    swal('Simon says', 'You won!', 'success')
+        .then( () => this.start());
+  }
+
+  lostGame() {
+    swal('Simon says', 'You lost :(', 'error')
+        .then( () => {
+          this.removeClickEvents();
+          this.start();
+        });
   }
 }
 

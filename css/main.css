@@ -4,6 +4,7 @@ body {
   display: flex;
   align-items: center;
   height: 100vh;
+  font-family: 'Roboto', sans-serif;
 }
 
 .gameboard {
@@ -12,7 +13,7 @@ body {
   border-radius: 50%;
   overflow: hidden;
   margin: 0 auto;
-  max-height: 60vh;
+  max-height: 55vh;
   max-width: 60vh;
 }
 
@@ -75,4 +76,13 @@ body {
 
 .hide {
   display: none;
+}
+
+/* Responsive */
+@media only screen and (max-width: 480px){
+  .btn-start {
+    width: 90%;
+    left: calc(50% - 45%);
+  }
+  
 }
