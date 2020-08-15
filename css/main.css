@@ -3,13 +3,15 @@
   --primary-color-start: #aa2222; 
   --white: #f2f2f2;
 }
+html, body {
+  height: 100vh; 
+}
 body {
   font-family: 'Red Rose', cursive;
   margin: 0;
   background-color: var(--primary-color);
   display: flex;
   align-items: center;
-  height: 100vh; 
 }
 .gameboard {
   height: 100vh;
@@ -75,20 +77,23 @@ body {
 .verde.light {
   background: #badc58;
 }
-
+.btn-container{
+  width: 100%;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+}
 .btn-start {
   text-transform: uppercase;
   padding: 15px;
   border: none;
   border-radius: 50%;
-  width: 150px;
-  height: 150px;
+  width: 280px;
+  height: 280px;
   background-color: var(--primary-color-start);
   color: var(--white);
-  font-size: 2.2rem;
-  position: absolute;
-  top: calc(50% - 75px);
-  left: calc(50% - 75px);
+  font-size: 2.9rem;
+  margin: 0 auto;
 }
 .btn-start-click {
   background-color: var(--primary-color);
@@ -102,5 +107,9 @@ body {
 
 /* Responsive */
 @media only screen and (max-width: 480px){
-  
+  .btn-start {
+    width: 180px;
+    height: 180px;
+    font-size: 2.2rem;
+  }
 }
