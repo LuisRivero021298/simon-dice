@@ -3,15 +3,19 @@ const lightBlue = document.getElementById('lightBlue');
 const violet = document.getElementById('violet');
 const orange = document.getElementById('orange');
 const green = document.getElementById('green');
+const lastLevel = 10;
 
 class Game {
   constructor() {
     this.start();
-    this.generateSequence();
-    this.nextLevel();
+    setTimeout(() => {
+      this.generateSequence();
+      this.nextLevel();
+    }, 700);
   }
 
   start () {
+    this.chooseColor = this.chooseColor.bind(this);
     btnStart.classList.add('hide');
     this.level = 1;
     this.colors = {
@@ -27,7 +31,9 @@ class Game {
   }
 
   nextLevel() {
+    this.subLevel = 0;
     this.iliminateSequence();
+    this.addClickEvents();
   }
 
   numberToColor(num){
@@ -43,6 +49,19 @@ class Game {
     }
   }
 
+  colorToNumber(color){
+    switch(color) {
+      case 'lightBlue': 
+        return 0;
+      case 'violet': 
+        return 1;
+      case 'orange':
+        return 2;
+      case 'green': 
+        return 3;
+    }
+  }
+
   iliminateSequence() {
     for (let i = 0; i < this.level; i++) {
       let color = this.numberToColor(this.sequence[i]);
@@ -53,6 +72,44 @@ class Game {
   iliminateColor(color) {
     this.colors[color].classList.add('light');
     setTimeout(() => this.colors[color].classList.remove('light'), 500);
+  }
+
+  addClickEvents(){
+    this.colors.lightBlue.addEventListener('click', this.chooseColor);
+    this.colors.violet.addEventListener('click', this.chooseColor);
+    this.colors.orange.addEventListener('click', this.chooseColor);
+    this.colors.green.addEventListener('click', this.chooseColor);
+  }
+
+  removeClickEvents(){
+    this.colors.lightBlue.removeEventListener('click', this.chooseColor);
+    this.colors.violet.removeEventListener('click', this.chooseColor);
+    this.colors.orange.removeEventListener('click', this.chooseColor);
+    this.colors.green.removeEventListener('click', this.chooseColor);
+  }
+
+  chooseColor (ev) {
+    let colorName = ev.target.dataset.color;
+    const numberColor = this.colorToNumber(colorName);
+    this.iliminateColor(colorName);
+    
+    if(numberColor === this.sequence[this.subLevel]) {
+      this.subLevel++;
+      if (this.subLevel === this.level) {
+        this.level++;
+        //this.removeClickEvents();
+        if(this.level === (lastLevel + 1)){
+          //Win
+        } else {
+          setTimeout(() => this.nextLevel(), 1700) ;
+        }
+
+      }
+    } else {
+      //defeat
+
+    }
+
   }
 }
 
