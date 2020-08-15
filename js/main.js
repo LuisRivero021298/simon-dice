@@ -3,7 +3,7 @@ const lightBlue = document.getElementById('lightBlue');
 const violet = document.getElementById('violet');
 const orange = document.getElementById('orange');
 const green = document.getElementById('green');
-const lastLevel = 1;
+const lastLevel = 10;
 
 class Game {
   constructor() {
@@ -16,7 +16,7 @@ class Game {
 
   start () {
     this.chooseColor = this.chooseColor.bind(this);
-    btnStart.classList.toggle('hide');
+    btnStart.classList.toggle('btn-start-click');
     this.level = 1;
     this.colors = {
       lightBlue,
